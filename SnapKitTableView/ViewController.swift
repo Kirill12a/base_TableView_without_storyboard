@@ -8,15 +8,16 @@
 import UIKit
 
 
-var KSize = UIScreen.main.bounds
+var size = UIScreen.main.bounds
 var dataTable:UITableView!
 
-var itemstringArr = ["Курица","Вода","Сахар","Соль","Кола","Яйцо"]
+var itemstringArr = ["Курица","Вода","Сахар","Соль","Кола","Яйцо", "Банан"]
 
 class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 100)
         
         self.title = "Еда"
      makeTable()
@@ -26,15 +27,16 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
     func makeTable()
     {
         
-        dataTable=UITableView.init(frame: CGRect(x: 0, y: 0, width: KSize.width, height: KSize.height-64), style:.grouped)
+        dataTable=UITableView.init(frame: CGRect(x: 0, y: 0, width: SnapKitTableView.size.width, height: SnapKitTableView.size.height-64), style:.grouped)
         dataTable.delegate = self
         dataTable.dataSource = self
         self.view.addSubview(dataTable)
         
          //header для таблицы
         let  headerView:UIView = UIView(frame:CGRect(x:0,y:0,width:UIScreen.main.bounds.width,height:60))
-        let  label = UILabel(frame:CGRect(x:20,y:20,width:180,height:30))
-        label.text = "Еда"
+        let  label = UILabel(frame:CGRect(x:20,y:20,width:270,height:30))
+        label.text = "Что купить 🛒"
+        label.numberOfLines = 0
         label.textColor = UIColor.orange
         label.font = .boldSystemFont(ofSize: 40)
         headerView.addSubview(label)
@@ -65,6 +67,8 @@ class ViewController: UIViewController,UITableViewDataSource,UITableViewDelegate
             cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: identifier)
             
         }
+        
+        cell?.selectionStyle = .none
         cell?.textLabel?.text = itemstringArr[indexPath.row]
         cell?.detailTextLabel?.text = "прыгнуть туда"
         cell?.detailTextLabel?.font = UIFont .systemFont(ofSize: CGFloat(13))

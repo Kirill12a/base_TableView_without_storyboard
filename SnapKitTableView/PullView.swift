@@ -13,7 +13,7 @@ import SnapKit
 
 class PullView: UIViewController {
 
-    let photoview = UIView()
+    let photoview = UIImageView(image: UIImage(systemName: "gamecontroller.fill"))
     let label = UILabel()
 
     override func viewDidLoad() {
@@ -21,28 +21,36 @@ class PullView: UIViewController {
         
         self.view.backgroundColor = UIColor.white
 
-        photoview.backgroundColor = UIColor.red
-        label.text = "Hi"
         label.backgroundColor = UIColor.orange
+        label.text = "Привет 👋"
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 40)
         self.view.addSubview(photoview)
         self.view.addSubview(label)
         
         photoview.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(100)
-            make.height.equalTo(100)
-            make.center.equalTo(self.view)
+            make.width.equalTo(200)
+            make.height.equalTo(200)
+            make.center.equalToSuperview()
         }
         
         label.snp.makeConstraints { (make) -> Void in
-            make.left.equalTo(photoview.snp.left).offset(50)
-            make.width.equalTo(200)
+//            make.width.equalTo(200)
             make.height.equalTo(40)
-            make.top.equalTo(photoview.snp.bottom)
+            make.top.equalTo(photoview.snp_bottomMargin).offset(50)
+            make.left.right.equalToSuperview().inset(30)
+//            make.left.right.equalTo(v)
+
+//
+//            make.left.equalTo(photoview.snp.left).offset(-50)
+//            make.width.equalTo(200)
+//            make.height.equalTo(40)
+//            make.top.equalTo(photoview.snp.bottom)
         }
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { // нажатие
         self.dismiss(animated: true, completion: nil)
     }
 }
